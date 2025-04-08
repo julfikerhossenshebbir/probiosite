@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Link } from "react-router-dom";
 
 /**
  * Project interface for type safety
@@ -19,6 +20,7 @@ interface Project {
   tags: string[];
   liveUrl?: string;
   githubUrl?: string;
+  slug: string;
 }
 
 /**
@@ -40,6 +42,7 @@ const Projects = () => {
       tags: ["React", "Next.js", "Stripe", "Tailwind CSS"],
       liveUrl: "https://project1.example.com",
       githubUrl: "https://github.com/yourusername/project1",
+      slug: "ecommerce-website",
     },
     {
       id: 2,
@@ -51,6 +54,7 @@ const Projects = () => {
       tags: ["React", "Firebase", "Redux", "Material UI"],
       liveUrl: "https://project2.example.com",
       githubUrl: "https://github.com/yourusername/project2",
+      slug: "task-management-app",
     },
     {
       id: 3,
@@ -62,6 +66,7 @@ const Projects = () => {
       tags: ["HTML", "CSS", "JavaScript", "Responsive Design"],
       liveUrl: "https://project3.example.com",
       githubUrl: "https://github.com/yourusername/project3",
+      slug: "portfolio-website-template",
     },
     {
       id: 4,
@@ -73,6 +78,7 @@ const Projects = () => {
       tags: ["React", "OpenWeather API", "Chart.js", "Geolocation"],
       liveUrl: "https://project4.example.com",
       githubUrl: "https://github.com/yourusername/project4",
+      slug: "weather-dashboard",
     },
     {
       id: 5,
@@ -84,6 +90,7 @@ const Projects = () => {
       tags: ["React", "Node.js", "MongoDB", "Express"],
       liveUrl: "https://project5.example.com",
       githubUrl: "https://github.com/yourusername/project5",
+      slug: "restaurant-booking-system",
     },
     {
       id: 6,
@@ -93,6 +100,7 @@ const Projects = () => {
       date: "November 2021",
       category: "design",
       tags: ["Branding", "Logo Design", "Typography", "Color Theory"],
+      slug: "brand-identity-design",
     },
   ];
 
@@ -163,9 +171,11 @@ const Projects = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {/* Project Image/Preview */}
-                  <div className={`h-40 rounded-md ${getGradientClass(project.id)} flex items-center justify-center`}>
-                    <ExternalLink className="h-8 w-8 text-primary" />
-                  </div>
+                  <Link to={`/projects/${project.slug}`}>
+                    <div className={`h-40 rounded-md ${getGradientClass(project.id)} flex items-center justify-center hover:opacity-90 transition-opacity cursor-pointer`}>
+                      <ExternalLink className="h-8 w-8 text-primary" />
+                    </div>
+                  </Link>
                   
                   {/* Project Description */}
                   <p className="text-muted-foreground">{project.description}</p>
@@ -181,13 +191,11 @@ const Projects = () => {
                   </div>
                 </CardContent>
                 <CardFooter className="flex justify-between gap-2">
-                  {project.liveUrl && (
-                    <Button asChild className="flex-1">
-                      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="h-4 w-4 mr-2" /> Live Demo
-                      </a>
-                    </Button>
-                  )}
+                  <Button asChild className="flex-1">
+                    <Link to={`/projects/${project.slug}`}>
+                      View Details
+                    </Link>
+                  </Button>
                   
                   {project.githubUrl && (
                     <Button variant="outline" asChild className="flex-1">

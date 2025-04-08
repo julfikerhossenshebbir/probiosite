@@ -198,8 +198,10 @@ const Blog = () => {
                 </Avatar>
                 <span className="text-sm">John Doe</span>
               </div>
-              <Button variant="ghost" size="sm" className="flex items-center gap-1">
-                Read More <ArrowRight className="h-4 w-4" />
+              <Button variant="ghost" size="sm" asChild className="flex items-center gap-1">
+                <Link to={`/blog/${post.slug}`}>
+                  Read More <ArrowRight className="h-4 w-4" />
+                </Link>
               </Button>
             </CardFooter>
           </Card>
